@@ -51,7 +51,7 @@ def get_unfollows():
     current_followers = open(os.path.join(__location__, 'current.txt')).readlines()
 
     # open old followers from file
-    old_followers = open('old.txt').readlines()
+    old_followers = open(os.path.join(__location__, 'old.txt')).readlines()
 
     # calculate differences in followers
     s = set(current_followers)
