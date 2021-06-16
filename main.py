@@ -2,8 +2,10 @@ import json
 import instaloader
 import requests
 import auth
+import os
 
 base_url = 'https://api.telegram.org/bot'
+__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 
 def test_bot():
@@ -38,7 +40,7 @@ def get_unfollows():
     profile = instaloader.Profile.from_username(L.context, auth.insta_username)
 
     # retrieve & store current followers to file
-    current_file = open('current.txt', 'w')
+    current_file = open(os.path.join(__location__, 'current.txt'), 'w')
     current_followers = []
     for follower in profile.get_followers():
         current_file.write(follower.username + '\n')
@@ -46,7 +48,7 @@ def get_unfollows():
     current_file.close()
 
     # open current followers from file
-    current_followers = open('current.txt').readlines()
+    current_followers = open(os.path.join(__location__, 'current.txt')).readlines()
 
     # open old followers from file
     old_followers = open('old.txt').readlines()
@@ -62,7 +64,7 @@ def get_unfollows():
             send_message(f'{unfollwer} unfollowed you.')
 
     # store current followers into old file
-    old_file = open('old.txt', 'w')
+    old_file = open(os.path.join(__location__, 'old.txt'), 'w')
     for follower in current_followers:
         old_file.write(follower)
     old_file.close()
