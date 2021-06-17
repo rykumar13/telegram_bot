@@ -72,3 +72,4 @@ def get_unfollows():
 
 if __name__ == '__main__':
     get_unfollows()
+    print("script complete")
